@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start-server": "json-server --watch backend/videos.json"
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}
