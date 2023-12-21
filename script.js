@@ -10,7 +10,7 @@ async function buscarEMostrarVideos() {
         const videos = await busca.json();
         videos.forEach((video) => {
             if (video.categoria == "") {
-                throw new Error(`O vídeo ${video.titulo} não tem categoria`)
+                throw new Error(`O vídeo ${video.titulo} não tem categoria`);
             }
             // Corpo da segunda callback
             containerVideos.innerHTML += `
@@ -22,9 +22,9 @@ async function buscarEMostrarVideos() {
                     <p class="categoria" hidden>${video.categoria}</p>
                 </div>
             </li>`;
-        })
+        });
     } catch (error) {
-        containerVideos.innerHTML = `<p> Houve um erro ao carregar os videos: ${error}</p>`
+        containerVideos.innerHTML = `<p> Houve um erro ao carregar os videos: ${error}</p>`;
     }
 }
 
@@ -49,21 +49,19 @@ const botaoCategoria = document.querySelectorAll('.superior__item');
 botaoCategoria.forEach((botao) => {
     let nomeCategoria = botao.getAttribute("name");
     botao.addEventListener('click', () => filtrarPorCategoria(nomeCategoria));
-})
+});
 
 function filtrarPorCategoria(nomeCategoria) {
     // debugger
     const videos = document.querySelectorAll('.videos__item');
     if(nomeCategoria == "Tudo") {
-        console.log(nomeCategoria);
         videos.forEach((video) => {
-            video.style.display = 'block';
-            return;
+            video.style.display = 'block'; // Mostrar todos os videos
         })
     } else {
         videos.forEach((video) => {
-            const categorialDoAtualVideo = video.querySelector('.categoria').textContent;
-            video.style.display = categorialDoAtualVideo.includes(nomeCategoria) ? 'block' : 'none'
-        })
+            const categorialDoAtualVideo = video.querySelector('.categoria').textContent; // Puxado do json
+            video.style.display = categorialDoAtualVideo.includes(nomeCategoria) ? 'block' : 'none' // Mostrar videos com a categoria clicada
+        });
     }
-}
+};
