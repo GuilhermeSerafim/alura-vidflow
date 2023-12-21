@@ -3,7 +3,8 @@ const containerVideos = document.querySelector(".videos__container");
 // Maneira mais moderna e legível
 // Indicando ao js que estamos lidando com operações assincronas
 async function buscarEMostrarVideos() {
-    // Callback é uma função que é passada como argumento para outra função e é executada após a conclusão de uma operação assíncrona.
+    try {
+        // Callback é uma função que é passada como argumento para outra função e é executada após a conclusão de uma operação assíncrona.
     const busca = await fetch("http://localhost:3000/videos") // await aguarda até que a busca seja feita
     const videos = await busca.json();
     videos.forEach((video) => {
@@ -17,6 +18,12 @@ async function buscarEMostrarVideos() {
                 </div>
             </li>`;
     })
+    } catch (error) {
+        containerVideos.innerHTML = `<p> Houve um erro ao carregar os videos: ${error}</p>`
+    } finally {
+        alert('Função finalizada');
+    }
+    
 }
 
 buscarEMostrarVideos();
