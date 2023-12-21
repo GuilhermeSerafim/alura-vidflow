@@ -33,18 +33,10 @@ barraDePesquisa.addEventListener('input', filtrarPesquisa);
 
 function filtrarPesquisa() {
     const videos = document.querySelectorAll(".videos__item");
-    if (barraDePesquisa.value != "") {
-        for (let video of videos) {
-            let titulo = video.querySelector(".titulo-video").textContent.toLowerCase();
-            let valorFiltro = barraDePesquisa.value.toLowerCase();
+    const valorFiltro = barraDePesquisa.value.toLowerCase();
 
-            // O método includes é usado para comparar se o texto do título contém a substring inserida na barra de pesquisa
-            if (!titulo.includes(valorFiltro)) {
-                video.style.display = "none";
-            } else {
-                video.style.display = "block"
-
-            }
-        }
-    }
+        videos.forEach((video) => {
+            const tituloDoAtualVideo = video.querySelector('.titulo-video').textContent.toLowerCase(); // video é o elemento <li> inteiro
+            video.style.display = !valorFiltro == "" ? tituloDoAtualVideo.includes(valorFiltro) ? 'block' : 'none' : 'none';
+        });
 }
