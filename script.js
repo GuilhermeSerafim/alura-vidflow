@@ -5,7 +5,7 @@ const containerVideos = document.querySelector(".videos__container");
 async function buscarEMostrarVideos() {
     try {
         // Callback é uma função que é passada como argumento para outra função e é executada após a conclusão de uma operação assíncrona.
-    const busca = await fetch("http://localhost:3000/videos") // await aguarda até que a busca seja feita
+    const busca = await fetch("http://localhost:3000/videos"); // await aguarda até que a busca seja feita
     const videos = await busca.json();
     videos.forEach((video) => {
         if(video.categoria == "") {
@@ -27,3 +27,15 @@ async function buscarEMostrarVideos() {
 }
 
 buscarEMostrarVideos();
+
+const barraDePesquisa = document.querySelector('.pesquisar__input');
+barraDePesquisa.addEventListener('input', filtrarPesquisa);
+
+function filtrarPesquisa() {
+    const videos = document.querySelectorAll(".videos__item");
+    if(barraDePesquisa.value != "") {
+        
+    } else {
+        
+    }
+}
