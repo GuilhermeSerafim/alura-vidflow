@@ -8,6 +8,9 @@ async function buscarEMostrarVideos() {
     const busca = await fetch("http://localhost:3000/videos") // await aguarda até que a busca seja feita
     const videos = await busca.json();
     videos.forEach((video) => {
+        if(video.categoria == "") {
+            throw new Error(`O vídeo ${video.titulo} não tem categoria`)
+        }
         // Corpo da segunda callback
         containerVideos.innerHTML += `
             <li class="videos__item"><iframe src="${video.url}" title="${video.titulo}" frameborder="0" allowfullscreen></iframe>
@@ -20,10 +23,7 @@ async function buscarEMostrarVideos() {
     })
     } catch (error) {
         containerVideos.innerHTML = `<p> Houve um erro ao carregar os videos: ${error}</p>`
-    } finally {
-        alert('Função finalizada');
     }
-    
 }
 
 buscarEMostrarVideos();
