@@ -2,6 +2,7 @@ const containerVideos = document.querySelector(".videos__container");
 
 // Maneira mais moderna e legível
 // Indicando ao js que estamos lidando com operações assincronas
+// Buscar videos e exibir no dom
 async function buscarEMostrarVideos() {
     try {
         // Callback é uma função que é passada como argumento para outra função e é executada após a conclusão de uma operação assíncrona.
@@ -28,6 +29,7 @@ async function buscarEMostrarVideos() {
 
 buscarEMostrarVideos();
 
+// Filtrar pela barra de pesquisa
 const barraDePesquisa = document.querySelector('.pesquisar__input');
 barraDePesquisa.addEventListener('input', filtrarPesquisa);
 
@@ -35,8 +37,22 @@ function filtrarPesquisa() {
     const videos = document.querySelectorAll(".videos__item");
     const valorFiltro = barraDePesquisa.value.toLowerCase();
 
-        videos.forEach((video) => {
-            const tituloDoAtualVideo = video.querySelector('.titulo-video').textContent.toLowerCase(); // video é o elemento <li> inteiro
-            video.style.display = !valorFiltro == "" ? tituloDoAtualVideo.includes(valorFiltro) ? 'block' : 'none' : 'none';
-        });
+    videos.forEach((video) => {
+        const tituloDoAtualVideo = video.querySelector('.titulo-video').textContent.toLowerCase(); // video é o elemento <li> inteiro
+        video.style.display = !valorFiltro == "" ? tituloDoAtualVideo.includes(valorFiltro) ? 'block' : 'none' : 'none';
+    });
+}
+
+// Filtrar por categoria
+const botaoCategoria = document.querySelectorAll('.superior__item');
+botaoCategoria.forEach((botao) => {
+    let nomeCategoria = botao.getAttribute("name");
+    botao.addEventListener('click', () => filtrarPorCategoria(nomeCategoria));
+})
+
+function filtrarPorCategoria(filtro) {
+    const videos = document.querySelector('.videos__item');
+    for(let video of videos) {
+        // Lógica para filtrar por categorias
+    }
 }
